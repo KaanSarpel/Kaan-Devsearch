@@ -1,0 +1,29 @@
+{% if queryset.has_other_pages %} <!-- Eğer toplam verilerimi bir sayfada gösterebiliyorsam altında sayfa numarası yazsın istemiyorum.Burda eğer başka sayfalarda mevcut ise diyor. -->
+<div class="pagination">
+    <ul class="container">
+
+        {% if queryset.has_previous %} <!-- Projects = Paginator yaptığımız için onun içindeki built in fonksiyonları kullanabiliyoruz. -->
+        <li><a href="?page={{queryset.previous_page_number}}" class="btn page-link"
+                data-page="{{queryset.previous_page_number}}">&#10094; Prev</a></li>
+        {% endif %}
+
+
+        {% for page in custom_range %}
+
+        {% if page == queryset.number%} <!-- If that page index matches the current page button style that button make bold. -->
+        <li><a href="?page={{page}}" class="btn page-link btn--sub" data-page="{{page}}">{{page}}</a></li> 
+        {% else %}
+        <li><a href="?page={{page}}" class="btn page-link" data-page="{{page}}">{{page}}</a></li> <!-- To use pagination, we take the URL and we stick a question mark at the end of It.  -->
+        {% endif %}
+        {% endfor %}
+
+        {% if queryset.has_next %}
+        <li><a href="?page={{queryset.next_page_number}}" class="btn page-link"
+                data-page="{{queryset.next_page_number}}">Next &#10095;</a></li>
+        {% endif %}
+
+
+
+    </ul>
+</div>
+{% endif %}

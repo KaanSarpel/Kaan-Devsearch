@@ -1,0 +1,45 @@
+{% extends 'main.html' %}
+{% block content %}
+
+
+
+<!-- Main Section -->
+<main class="formPage my-xl">
+    <div class="content-box">
+        <div class="formWrapper">
+            <a href="{% url 'account' %}">Back</a>
+            <br>
+
+            <form class="form" method="POST" enctype="multipart/form-data">  <!-- Use enctype="multipart/form-data" in order to submit submit this data(Image file olduğu için formun içinde).Now that we can send these files to backend,lets get those files.(Views'a ekleme yap.) -->
+                {% csrf_token %}
+
+                {% for field in form %}
+                <!-- Input:Text -->
+                <div class="form__field">
+                    <label for="formInput#text">{{field.label}}</label>
+                    {{field}}
+                </div>
+                {% endfor %}
+
+                <div class="form__field">
+                    <label for="formInput#text">Add Tags </label>
+                    <textarea class="input" name="newtags" placeholder="Add tags here... Make sure to put a space or ' , ' in between tags."></textarea>
+                </div>
+                <div>
+                    Delete Tags
+                    <br>
+                    {% for tag in tags %}
+                    <a href="{% url 'delete-tag' tag.id %}">{{tag}}</a>
+                    {% endfor %}
+                </div>
+                <br>
+
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+            
+            </form>
+        </div>
+    </div>
+</main>
+
+
+{% endblock %}

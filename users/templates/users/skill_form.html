@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+<!-- Main Section -->
+<main class="formPage my-xl">
+    <div class="content-box">
+        <div class="formWrapper">
+            <a href="{% url 'account' %}">Back</a>
+            <br>
+
+            <form class="form" method="POST" action="">
+                {% csrf_token %}
+
+                {% for field in form %}
+                <div class="form__field">
+                    <label for="formInput#text"> {{field.label}}</label>
+                    {{field}}
+                    <!-- Normally at HTML code there was input value here , but we did It through forms.py for name,field in self. ile başlayan line of code.  -->
+                </div>
+                {% endfor %}
+
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+</main>
+
+
+
+{% endblock %}

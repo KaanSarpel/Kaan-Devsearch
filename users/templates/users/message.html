@@ -1,0 +1,27 @@
+{% extends 'main.html' %} 
+
+
+{% block content %}
+<!-- Main Section -->
+<main class="messagePage my-xl">
+  <div class="content-box">
+    <div class="message">
+      <a href="{% url 'inbox' %}">Back</a>
+      <br>
+      <h4>Subject: {{message.subject}}</h4>
+      <br>
+        {% if message.sender %}
+        <div class="message__body">{{message.body|linebreaksbr}}</div>
+        <br>
+        <a href="{% url 'user-profile' message.sender.id  %}">{{message.name}}</a>
+        <p class="message__date">{{message.created}}</p>
+        {% else %}
+        <div class="message__body">{{message.body|linebreaksbr}}</div>
+        <br>
+        <p>{{message.name}}</p>
+        <p class="message__date">{{message.created}}</p>
+        {% endif %}
+    </div>
+  </div>
+</main>
+{% endblock content %}
